@@ -35,6 +35,7 @@ class TestVenue < MiniTest::Test
     guests = [guest1, guest2]
     room1 = Room.new(songs, guests, 5)
     room2 = Room.new(songs, guests, 2)
+    @room3 = Room.new(songs, guests, 20)
     rooms = [room1, room2]
 
     @venue = Venue.new(rooms, bar)
@@ -45,6 +46,11 @@ class TestVenue < MiniTest::Test
     assert_equal("Coke Cola", @venue.bar.drinks[1].name)
     assert_equal("Joe Maher", @venue.rooms[0].guests[0].name)
     assert_equal("My Way", @venue.rooms[0].songs[0].title)
+  end
+
+  def test_add_new_room()
+    @venue.add_room(@room3)
+    assert_equal(3, @venue.rooms.length)
   end
 
 end
