@@ -1,6 +1,6 @@
 class Room
   attr_reader(:songs, :guests, :max_capacity, :fee)
-  def initialize(songs = [], guests = [], max_capacity = 10, fee = 50)
+  def initialize(songs = [], guests = [], max_capacity, fee)
     @songs = songs
     @guests = guests
     @max_capacity = max_capacity
@@ -15,7 +15,7 @@ class Room
   def add_guest(guest)
     return if is_room_full?()
     return if guest.nil? || guest.class != Guest
-    charge_guest(guest)
+    charge_guest_for_room(guest)
     @guests << guest
   end
 
@@ -27,8 +27,17 @@ class Room
     @guests.length >= @max_capacity
   end
 
-  def charge_guest(guest)
-    guest[:price] -= @room.fee
+  def charge_guest_for_room(guest)
+    return if (!can_afford_room?(guest))
+    guest.charge(@fee)
+  end
+
+  def can_afford_room?(guest)
+    guest.money >= @fee
+  end
+
+  def return_guest_by_name(name)
+    @guests.each {|guest| return guest if guest.name == name}
   end
 
 end
