@@ -14,6 +14,7 @@ class TestRoom < MiniTest::Test
     guests = [guest1, guest2]
     @room1 = Room.new(songs, guests, 5)
     @room2 = Room.new(songs, guests, 2)
+    @guest3 = Guest.new({name: "Charlie Maher", tel: "98765432101", email: "charlie_maher@hotmail.com" })
   end
 
   def test_set_up()
@@ -28,13 +29,12 @@ class TestRoom < MiniTest::Test
   end
 
   def test_add_guest()
-    guest3 = Guest.new({name: "Charlie Maher", tel: "98765432101", email: "charlie_maher@hotmail.com" })
-    @room1.add_guest(guest3)
+    @room1.add_guest(@guest3)
     assert_equal(3, @room1.guests.length)
   end
 
   def test_cant_add_wrong_object_to_song()
-    song3 = Guest.new({name: "Charlie Maher", tel: "98765432101", email: "charlie_maher@hotmail.com" })
+    song3 = @guest3
     @room1.add_song(song3)
     assert_equal(2, @room1.songs.length)
   end
@@ -54,5 +54,10 @@ class TestRoom < MiniTest::Test
   def test_is_room_full?()
     assert_equal(true, @room2.is_room_full?())
     assert_equal(false, @room1.is_room_full?())
+  end
+
+  def test_guest_can_afford_room?()
+    assert_equal(true, @room1.can_afford_room?())
+
   end
 end

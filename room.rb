@@ -1,9 +1,10 @@
 class Room
-  attr_reader(:songs, :guests, :max_capacity)
-  def initialize(songs = [], guests = [], max_capacity = 10)
+  attr_reader(:songs, :guests, :max_capacity, :fee)
+  def initialize(songs = [], guests = [], max_capacity = 10, fee = 50)
     @songs = songs
     @guests = guests
     @max_capacity = max_capacity
+    @fee = fee
   end
 
   def add_song(song)

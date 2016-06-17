@@ -10,6 +10,5 @@ class TestGuest < MiniTest::Test
   def test_return_guest_name()
     assert_equal("Joe Maher", @guest.name)
   end
-  
 
 end
