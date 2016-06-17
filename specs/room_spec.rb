@@ -14,7 +14,7 @@ class TestRoom < MiniTest::Test
     guests = [guest1, guest2]
     @room1 = Room.new(songs, guests, 5)
     @room2 = Room.new(songs, guests, 2)
-    @guest3 = Guest.new({name: "Charlie Maher", tel: "98765432101", email: "charlie_maher@hotmail.com" })
+    @guest3 = Guest.new({name: "Charlie Maher", tel: "98765432101", email: "charlie_maher@hotmail.com", money: 50, fav_song: "Purple Rain"})
   end
 
   def test_set_up()
@@ -58,6 +58,11 @@ class TestRoom < MiniTest::Test
 
   def test_guest_can_afford_room?()
     assert_equal(true, @room1.can_afford_room?())
-
   end
+
+  def test_charge_guest()
+    @room1.charge_guest(@guest3)
+    assert_equal(45, @guest3[:price])
+  end
+
 end

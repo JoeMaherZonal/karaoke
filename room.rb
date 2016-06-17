@@ -15,6 +15,7 @@ class Room
   def add_guest(guest)
     return if is_room_full?()
     return if guest.nil? || guest.class != Guest
+    charge_guest(guest)
     @guests << guest
   end
 
@@ -24,6 +25,10 @@ class Room
 
   def is_room_full?()
     @guests.length >= @max_capacity
+  end
+
+  def charge_guest(guest)
+    guest[:price] -= @room.fee
   end
 
 end
