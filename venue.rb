@@ -9,4 +9,8 @@ class Venue
     return if room.nil? || room.class != Room
     @rooms << room
   end
+
+  def remove_room_by_index(index)
+    @rooms.delete(@rooms[index])
+  end
 end

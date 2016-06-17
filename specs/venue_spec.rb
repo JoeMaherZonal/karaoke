@@ -53,4 +53,9 @@ class TestVenue < MiniTest::Test
     assert_equal(3, @venue.rooms.length)
   end
 
+  def test_remove_room()
+    @venue.remove_room_by_index(1)
+    assert_equal(1, @venue.rooms.length)
+  end
+
 end
