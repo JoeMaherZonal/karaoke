@@ -13,9 +13,14 @@ class TestGuest < MiniTest::Test
     assert_equal(3, @guests.guests.length )
   end
 
-  def remove_guest_by_tel_num()
+  def test_remove_guest_by_tel_num()
     @guests.remove_guest_by_tel("12345678910")
     assert_equal(1, @guests.guests.length )
+  end
+
+  def test_return_guest_by_tel_num()
+    test_guest = @guests.return_guest_by_tel_num("12345678910")
+    assert_equal("Rachel Barry", test_guest[:name])
   end
 
 end

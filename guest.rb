@@ -17,4 +17,8 @@ class Guest
     @guests.each { |guest| @guests.delete(guest) if guest[:tel] == tel_num}
   end
 
+  def return_guest_by_tel_num(tel_num)
+    @guests.each { |guest| return guest if guest[:tel] == tel_num}
+  end
+
 end
