@@ -13,4 +13,16 @@ class Venue
   def remove_room_by_index(index)
     @rooms.delete(@rooms[index])
   end
+
+  def return_room_of_guest(guest_name)
+    @rooms.each do |room|
+      room.guests.each{|guest| return room if guest_name == guest.name}
+    end
+  end
+
+  def charge_guest_for_drink(guest_name, drink_name)
+
+  end
+
+
 end
