@@ -12,12 +12,17 @@ class Room
   end
 
   def add_guest(guest)
+    return if is_room_full?()
     return if guest.nil? || guest.class != Guest
     @guests << guest
   end
 
   def remove_guest_by_name(name)
     @guests.each{|guest| @guests.delete(guest) if guest.name == name}
+  end
+
+  def is_room_full?()
+    @guests.length >= @max_capacity
   end
 
 end
