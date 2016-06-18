@@ -40,4 +40,8 @@ class Room
     @guests.each {|guest| return guest if guest.name == name}
   end
 
+  def charge_guest(guest_to_charge, amount)
+    @guests.each {|guest| guest.charge(amount) if guest == guest_to_charge}
+  end
+
 end

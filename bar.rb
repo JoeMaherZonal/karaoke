@@ -27,6 +27,10 @@ class Bar
     @drinks.each{|drink| return drink if drink.name == name}
   end
 
+  def return_drink_price_by_name(name)
+    @drinks.each {|drink| return drink.price if drink.name == name}
+  end
+
   def return_food_by_name(name)
     @foods.each{|name| return food if food.name == name}
   end

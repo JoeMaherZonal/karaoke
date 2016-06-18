@@ -12,4 +12,8 @@ class Guest
   @money -= amount
  end
 
+ def money()
+  return @money
+ end
+
 end

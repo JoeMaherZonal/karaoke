@@ -58,14 +58,14 @@ class TestVenue < MiniTest::Test
     assert_equal(1, @venue.rooms.length)
   end
 
-  def test_return_room_of_guest
-    room = @venue.return_room_of_guest("Joe Maher")
-    assert_equal(room, @room1)
+  def test_return_room_index_of_guest
+    room_index = @venue.return_room_index_of_guest("Joe Maher")
+    assert_equal(0, room_index)
   end
 
-  # def test_charge_guest_for_drink()
-  #   @venue.charge_guest_for_drink("Joe Maher", "Fosters")
-  #   assert_equal(96, @venue.rooms[0].guests[0].money)
-  # end
+  def test_charge_guest_for_drink()
+    @venue.charge_guest_for_drink("Joe Maher", "Fosters")
+    assert_equal(96, @venue.rooms[0].guests[0].money)
+  end
 
 end
