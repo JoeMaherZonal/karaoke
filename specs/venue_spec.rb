@@ -68,4 +68,9 @@ class TestVenue < MiniTest::Test
     assert_equal(96, @venue.rooms[0].guests[0].money)
   end
 
+  def test_charge_guest_for_food_by_names()
+    @venue.charge_guest_for_food("Joe Maher", "Burger")
+    assert_equal(88, @venue.rooms[0].guests[0].money)
+  end
+
 end

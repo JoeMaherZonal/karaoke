@@ -29,5 +29,11 @@ class Venue
     @rooms[room_index].charge_guest(guest_to_charge, drink_price)
   end
 
+  def charge_guest_for_food(guest_name, food_name)
+    food_price = @bar.return_food_price_by_name(food_name)
+    room_index = return_room_index_of_guest(guest_name)
+    guest_to_charge = @rooms[room_index].return_guest_by_name(guest_name)
+    @rooms[room_index].charge_guest(guest_to_charge, food_price)
+  end
 
 end
