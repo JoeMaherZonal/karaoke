@@ -22,6 +22,14 @@ class Venue
     end
   end
 
+  def return_guest_with_name(guest_name)
+    @rooms.each do |room|
+      room.guests.each do |guest|
+       return guest if guest_name == guest.name
+       end
+    end
+  end
+
   def charge_guest_for_drink(guest_name, drink_name)
     drink_price = @bar.return_drink_price_by_name(drink_name)
     room_index = return_room_index_of_guest(guest_name)

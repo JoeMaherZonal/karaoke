@@ -74,4 +74,20 @@ class Room
     songs_file.close
   end
 
+  def load_guests_from_list(file_path)
+    return if !(File.file?(file_path))
+    load_data  = File.open(file_path, "r")
+      load_data.readlines.each do |line|
+        temp_ary = line.split(":")
+        guest_params = {}
+        guest_params[temp_ary[0].to_sym] = temp_ary[1].to_s
+        guest_params[temp_ary[2].to_sym] = temp_ary[3].to_s
+        guest_params[temp_ary[4].to_sym] = temp_ary[5].to_s
+        guest_params[temp_ary[6].to_sym] = temp_ary[7].to_s
+        guest = Song.new(guest_params)
+        @guests << guest
+      end
+    load_data.close
+  end
+
 end

@@ -1,0 +1,4 @@
+name:Joe Maher:tel:07539271620:email:joseph-maher@hotmail.co.uk:money:100:fav_song:Handle Bars:
+name:Rahel Barry:tel:07849182737:email:rachel_barry@gmail.com:money:300:fav_song:Tonights' gonna be a good night:
+name:Lilly Maher:tel:07588726152:email:lilly@cats.world:money:80:fav_song:The love cats:
+name:Jazz Barry:tel:07917762590:email:jazz@cats.world.co.uk:money:100:fav_song:The lion sleeps tonight:

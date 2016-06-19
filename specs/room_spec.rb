@@ -86,4 +86,12 @@ class TestRoom < MiniTest::Test
     expected_line = "title:My Way:artist:Frank Sinatra:genre:Jazz:year:1969:\n"
     assert_equal(expected_line, first_line)
   end
+
+  def test_load_guests()
+    @room3.load_guests_from_list("guest_list.txt")
+    first_line = File.open("guest_list.txt").readline
+    expected_line = "name:Joe Maher:tel:07539271620:email:joseph-maher@hotmail.co.uk:money:100:fav_song:Handle Bars:\n"
+    assert_equal(expected_line, first_line)
+    assert_equal(4, @room3.guests.length)
+  end
 end
