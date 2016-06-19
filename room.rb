@@ -91,4 +91,8 @@ class Room
     load_data.close
   end
 
+  def check_out_guests()
+    @guests = [] if @guests.length > 0
+  end
+
 end

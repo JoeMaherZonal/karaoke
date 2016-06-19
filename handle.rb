@@ -48,14 +48,22 @@ class Handle
   end
 
   def register_new_guest()
-    
+    guest_hash = @viewer.return_new_guest_info()
+    guest = Guest.new(guest_hash)
+    create_room() if (@venue.rooms.length == 0)
+    room_index = @viewer.select_room_num(@venue.rooms.length, guest.name)
+    @venue.rooms[room_index].guests << guest
+    @viewer.added_to_room_message(guest.name, room_index)
   end
 
-
-  def load_test_data()
+  def create_room()
     params = @viewer.display_create_room()
     room = Room.new(params)
     @venue.add_room(room)
+  end
+
+  def load_test_data()
+    create_room() if @venue.rooms.length == 0
 
     @venue.bar.load_drinks('drinks.txt')
      #@venue.bar.drinks.each{|drink| puts drink.name, " loaded!"}
@@ -76,6 +84,23 @@ class Handle
     end
   end
 
+  def list_rooms()
+    @viewer.list_rooms(@venue.rooms.length)
+  end
+
+  def check_out_room()
+    if @venue.rooms.length == 0
+      @viewer.no_rooms_active()
+      return
+    else
+      list_rooms()
+      room_number = @viewer.get_number_of_room_to_check_out()
+      index = room_number - 1
+      @venue.rooms[index].check_out_guests()
+      @viewer.successfuly_checked_out_guests(room_number) if @venue.rooms[index].guests.length == 0
+    end
+  end
+
   def run()
     while true
       menu_selection = @viewer.main_menu_choice()
@@ -85,9 +110,9 @@ class Handle
       when 2
         #do this
       when 3
-        #do this
+        check_out_room()
       when 4
-        #do this
+        register_new_guest()
       when 5
         charge_guest()
       when 6

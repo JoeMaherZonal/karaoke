@@ -1,5 +1,28 @@
 class Viewer
 
+  def main_menu_choice()
+    while true
+      system("clear")
+      puts "The Karaoke Bar"
+      puts ""
+      puts "1-Display current rooms"
+      puts "2-Check in a group"
+      puts "3-Check entire room out"
+      puts "4-Register new guest"
+      puts "5-Charge guest"
+      puts "6-Edit Karaoke bar"
+      puts "7-Exit"
+      puts ""
+      puts "8-Load test data"
+      puts ""
+      print "> "
+      choice = gets.chomp.to_i
+
+      kill_program() if choice == 7
+      return choice if (choice > 0 && choice < 9)
+    end
+  end
+
   def get_song_details()
     system("clear")
     puts "What is the song title?"
@@ -23,29 +46,6 @@ class Viewer
     song[:artist] = artist
     song[:year] = year
     return song
-  end
-
-  def main_menu_choice()
-    while true
-      system("clear")
-      puts "The Karaoke Bar"
-      puts ""
-      puts "1-Display current rooms"
-      puts "2-Check guest in/out"
-      puts "3-Check entire room out"
-      puts "4-Register new guest"
-      puts "5-Charge guest"
-      puts "6-Edit Karaoke bar"
-      puts "7-Exit"
-      puts ""
-      puts "8-Load test data"
-      puts ""
-      print "> "
-      choice = gets.chomp.to_i
-
-      kill_program() if choice == 7
-      return choice if (choice > 0 && choice < 9)
-    end
   end
 
   def kill_program()
@@ -121,8 +121,82 @@ class Viewer
     sleep(3)
   end
 
-  def 
+  def return_new_guest_info()
+    system("clear")
+    puts ""
+    puts "<<Guest Creator>>"
+    puts ""
+    puts "What is the new guests name?"
+    name = get_input()
+    name.capitalize!
+    puts "What is #{name}'s telephone numner?"
+    tel = get_input.to_i
+    puts "What is #{name}'s email?"
+    email = get_input()
+    puts "How much does #{name} have to spend?"
+    money = get_input()
+    puts "What is #{name}'s favourite song?"
+    fav_song = get_input()
 
+    guest = {name: name, tel: tel, email: email, money: money, fav_song: fav_song}
+    return guest
+  end
+
+  def select_room_num(num_of_rooms, guest_name)
+    puts ""
+    puts "There are currently #{num_of_rooms} active rooms, which room will #{guest_name} be checked into?"
+    while true
+
+    room_number = get_input.to_i
+
+      if (room_number < 1 || room_number > num_of_rooms)
+        puts "That room doesn't exist! Try a room between 1 and #{num_of_rooms}"
+      else
+        return room_number - 1
+      end
+    end
+  end
+
+  def added_to_room_message(guest_name, room_index)
+    room = room_index + 1
+    puts ""
+    puts "#{guest_name} was successfuly added to room #{room}!"
+    puts ""
+    sleep(3)
+  end
+
+  def list_rooms(num_of_rooms)
+    count = 1
+    puts ""
+    puts "Current active rooms:"
+    puts ""
+    while count < num_of_rooms + 1
+      puts "Room #{count}"
+      count += 1
+    end
+  end
+
+  def get_number_of_room_to_check_out()
+    puts ""
+    puts "Which room would you like to check out?"
+    puts ""
+    choice = get_input()
+    return choice.to_i
+  end
+
+  def no_rooms_active()
+    puts ""
+    puts "There are currently no active rooms."
+    puts ""
+    sleep(3)
+  end
+
+  def successfuly_checked_out_guests(room_number)
+    puts ""
+    puts "Room #{room_number} has been successfuly checked out."
+    puts ""
+    sleep(2)
+  end
 
 end
 
