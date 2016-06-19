@@ -198,5 +198,15 @@ class Viewer
     sleep(2)
   end
 
+  def room_stat_title()
+    puts ""
+    puts "Room \t Capacity \t Spend"
+  end
+
+  def print_status_of_room(room_num, num_of_guests, max_cap, spend_of_guests)
+    puts "#{room_num} \t #{num_of_guests}/#{max_cap} \t\t £#{spend_of_guests}"
+    puts ""
+  end
+
 end
 

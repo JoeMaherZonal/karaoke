@@ -95,4 +95,16 @@ class Room
     @guests = [] if @guests.length > 0
   end
 
+  def total_spend_of_all_guests()
+    spend = 0
+    @guests.each { |guest| spend += total_spend_of_guest(guest) }
+    return spend
+  end
+
+  def total_spend_of_guest(guest)
+    total = 0
+    guest.purchases.each { |item| spend += item.price  }
+    return total
+  end
+
 end

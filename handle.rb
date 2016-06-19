@@ -101,12 +101,24 @@ class Handle
     end
   end
 
+  def display_rooms()
+    count = 0
+    @viewer.room_stat_title()
+    while count < @venue.rooms.length
+      num_of_guests = @venue.rooms[count].guests.length
+      total_spend = @venue.rooms[count].total_spend_of_all_guests()
+      @viewer.print_status_of_room((count + 1), num_of_guests, @venue.rooms[count].max_capacity, total_spend)
+      count =+ 1
+    end
+    @viewer.get_input()
+  end
+
   def run()
     while true
       menu_selection = @viewer.main_menu_choice()
       case menu_selection
       when 1
-        #do this
+        display_rooms()
       when 2
         #do this
       when 3
