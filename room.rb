@@ -107,4 +107,6 @@ class Room
     return total
   end
 
+  def test_check_in_guest_list(file_path)
+  end
 end

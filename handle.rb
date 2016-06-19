@@ -13,10 +13,6 @@ class Handle
     @viewer = viewer
   end
 
-  def display_current_rooms()
-
-  end
-
   def charge_guest()
     guest_name = @viewer.return_guest_name()
     item_name = @viewer.return_item_name(guest_name)
@@ -51,6 +47,7 @@ class Handle
     guest_hash = @viewer.return_new_guest_info()
     guest = Guest.new(guest_hash)
     create_room() if (@venue.rooms.length == 0)
+    @viewer.list_rooms(@venue.rooms.length)
     room_index = @viewer.select_room_num(@venue.rooms.length, guest.name)
     @venue.rooms[room_index].guests << guest
     @viewer.added_to_room_message(guest.name, room_index)
@@ -64,18 +61,20 @@ class Handle
 
   def load_test_data()
     create_room() if @venue.rooms.length == 0
-
     @venue.bar.load_drinks('drinks.txt')
-     #@venue.bar.drinks.each{|drink| puts drink.name, " loaded!"}
-
     @venue.bar.load_foods('foods.txt')
-     #@venue.bar.foods.each {|food| puts food.name, "loaded!"}
-
     @venue.rooms[0].load_songs('songs.txt')
-     #@venue.rooms[0].songs.each {|song| puts song.title, "loaded!"}
-
     @venue.rooms[0].load_guests_from_list('guest_list.txt')
-     #@venue.rooms[0].guests.each {|guest| puts guest.name, "loaded!"}
+    new_room1 = Room.new({songs: [], guests: [], max_capacity: 5, fee: 10})
+    new_room2 = Room.new({songs: [], guests: [], max_capacity: 60, fee: 15})
+    new_room3 = Room.new({songs: [], guests: [], max_capacity: 25, fee: 4})
+    new_room4 = Room.new({songs: [], guests: [], max_capacity: 20, fee: 5})
+    @venue.rooms << new_room1
+    @venue.rooms << new_room2
+    @venue.rooms << new_room3
+    @venue.rooms << new_room4
+
+
 
     if (@venue.bar.drinks.length > 0 && @venue.bar.foods.length > 0 && @venue.rooms[0].songs.length > 0)
       @viewer.successful_load()
@@ -94,7 +93,7 @@ class Handle
       return
     else
       list_rooms()
-      room_number = @viewer.get_number_of_room_to_check_out()
+      room_number = @viewer.get_number_of_room_to_check_out("out")
       index = room_number - 1
       @venue.rooms[index].check_out_guests()
       @viewer.successfuly_checked_out_guests(room_number) if @venue.rooms[index].guests.length == 0
@@ -108,9 +107,45 @@ class Handle
       num_of_guests = @venue.rooms[count].guests.length
       total_spend = @venue.rooms[count].total_spend_of_all_guests()
       @viewer.print_status_of_room((count + 1), num_of_guests, @venue.rooms[count].max_capacity, total_spend)
-      count =+ 1
+      count += 1
     end
+
     @viewer.get_input()
+  end
+
+  def check_in_group()
+    if @venue.rooms.length == 0
+      @viewer.no_rooms_active()
+      return
+    else
+      list_rooms()
+      room_number = @viewer.get_number_of_room_to_check_out("in")
+      index = room_number - 1
+      file_path = @viewer.get_guest_list()
+      if File.exist?(file_path)
+        @venue.rooms[index].load_guests_from_list(file_path)
+        @viewer.successful_load()
+        return
+      else
+        @viewer.file_doesnt_exist()
+      end
+    end
+  end
+
+  def edit_venue()
+    choice = @viewer.edit_menu_options()
+    case choice
+    when 1
+      params = @viewer.get_new_foods()
+      food_item = Food.new(params)
+      @venue.bar.add_food(food_item)
+    when 2
+      params = @viewer.get_new_drinks()
+      drink_item = Drink.new(params)
+      @venue.bar.add_drink(drink_item)
+    when 3
+      create_room()
+    end
   end
 
   def run()
@@ -120,7 +155,7 @@ class Handle
       when 1
         display_rooms()
       when 2
-        #do this
+        check_in_group()
       when 3
         check_out_room()
       when 4
@@ -128,7 +163,7 @@ class Handle
       when 5
         charge_guest()
       when 6
-        #do this
+        edit_venue()
       when 8
         load_test_data()
       end
