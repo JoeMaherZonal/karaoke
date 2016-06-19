@@ -80,4 +80,18 @@ class TestDrink < MiniTest::Test
     assert_equal(expected_line, first_line)
   end
 
+  def test_load_drinks()
+    @bar2.load_foods("foods.txt")
+    food_class = @bar2.foods[0].class
+    assert_equal(2, @bar2.foods.length)
+    assert_equal(Food, food_class)
+  end
+
+  def test_save_foods()
+    @bar.save_foods("foods.txt")
+    first_line = File.open("foods.txt").readline()
+    expected_line = "name:Burger:discription:Beef Burger, served with chips or salad:price:12:\n"
+    assert_equal(expected_line, first_line)
+  end
+
 end

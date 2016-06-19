@@ -64,4 +64,29 @@ class Bar
     drinks_file.close
   end
 
+  def load_foods(file_path)
+    return if !(File.file?(file_path))
+    return if File.zero?(file_path)
+    loaded_foods = File.open(file_path, "r")
+    loaded_foods.readlines.each do |line|
+      temp_ary = line.split(":")
+      food_params = {}
+      food_params[temp_ary[0].to_sym] = temp_ary[1].to_s
+      food_params[temp_ary[2].to_sym] = temp_ary[3].to_s
+      food_params[temp_ary[4].to_sym] = temp_ary[5].to_i
+      food = Food.new(food_params)
+      @foods << food
+    end
+  end
+
+  def save_foods(file_path)
+    return if !(File.file?(file_path))
+    foods_file = File.open(file_path, 'w')
+    @foods.each do |food|
+      food_as_string ="name:#{food.name}:discription:#{food.discription}:price:#{food.price}:"
+      foods_file.puts(food_as_string)
+    end
+    foods_file.close
+  end
+
 end
