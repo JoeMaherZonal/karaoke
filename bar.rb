@@ -36,6 +36,6 @@ class Bar
   end
 
   def return_food_by_name(name)
-    @foods.each{|name| return food if food.name == name}
+    @foods.each{|food| return food if food.name == name}
   end
 end

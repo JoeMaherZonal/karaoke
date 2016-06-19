@@ -44,4 +44,24 @@ class TestDrink < MiniTest::Test
     assert_equal(1, @bar.drinks.length)
     assert_equal("Fosters", @bar.drinks[0].name)
   end
+
+  def test_return_drink_by_name()
+    drink = @bar.return_drink_by_name("Coke Cola")
+    assert_equal("Coke Cola", drink.name)
+  end
+
+  def test_return_drink_price_by_name()
+    price = @bar.return_drink_price_by_name("Coke Cola")
+    assert_equal(2.5, price)
+  end
+
+  def test_return_food_price_by_name()
+    price = @bar.return_food_price_by_name("Burger")
+    assert_equal(12, price)
+  end
+
+  def test_return_food_by_name()
+    food = @bar.return_food_by_name("Chicken Goujons")
+    assert_equal("Chicken Goujons", food.name)
+  end
 end

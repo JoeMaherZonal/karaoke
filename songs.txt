@@ -1,0 +1,2 @@
+name:My Way:artist:Frank Sinatra:genre:Jazz:year:1969:
+name:Purple Rain:artist:Prince:genre:Pop:year:1984:

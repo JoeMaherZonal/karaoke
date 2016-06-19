@@ -14,6 +14,7 @@ class TestRoom < MiniTest::Test
     guests = [guest1, guest2]
     @room1 = Room.new(songs, guests, 5, 5)
     @room2 = Room.new(songs, guests, 2, 20)
+    @room3 = Room.new([], [], 10, 10)
     @guest3 = Guest.new({name: "Charlie Maher", tel: "98765432101", email: "charlie_maher@hotmail.com", money: 50, fav_song: "Purple Rain"})
   end
 
@@ -68,6 +69,19 @@ class TestRoom < MiniTest::Test
   def test_return_guest_by_name()
     guest = @room1.return_guest_by_name("Joe Maher")
     assert_equal("Joe Maher", guest.name)
+  end
+
+  def test_load_songs_from_textfile()
+    @room3.load_songs("songs.txt")
+    assert_equal(Song, @room3.songs[0].class)
+    assert_equal(2, @room3.songs.length)
+  end
+
+  def test_save_songs_to_textfile()
+    @room2.save_songs("songs.txt")
+    first_line = File.open("songs.txt").readline
+    expected_line = "name:My Way:artist:Frank Sinatra:genre:Jazz:year:1969:\n"
+    assert_equal(expected_line, first_line)
   end
 
 end

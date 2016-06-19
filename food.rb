@@ -5,6 +5,4 @@ class Food
     @discription = params[:discription]
     @price = params[:price]
   end
-
-
 end

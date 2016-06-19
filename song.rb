@@ -6,5 +6,4 @@ class Song
     @genre = params[:genre]
     @year = params[:year]
   end
-
 end

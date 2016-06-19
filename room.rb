@@ -44,4 +44,30 @@ class Room
     @guests.each {|guest| guest.charge(amount) if guest == guest_to_charge}
   end
 
+  def load_songs(file_path)
+    return if !(File.file?(file_path))
+    load_data  = File.open(file_path, "r")
+      load_data.readlines.each do |line|
+      temp_ary = line.split(":")
+      song_params = {}
+      song_params[temp_ary[0].to_sym] = temp_ary[1].to_s
+      song_params[temp_ary[2].to_sym] = temp_ary[3].to_s
+      song_params[temp_ary[4].to_sym] = temp_ary[5].to_s
+      song_params[temp_ary[6].to_sym] = temp_ary[7].to_s
+      song = Song.new(song_params)
+      @songs << song
+      end
+    load_data.close
+  end
+
+  def save_songs(file_path)
+    return if !(File.file?(file_path))
+    songs_file = File.open(file_path, 'w')
+    @songs.each do |song|
+      songs_as_string ="name:#{song.title}:artist:#{song.artist}:genre:#{song.genre}:year:#{song.year}:"
+      songs_file.puts(songs_as_string)
+    end
+    songs_file.close
+  end
+
 end
