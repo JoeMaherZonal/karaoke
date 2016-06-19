@@ -84,7 +84,7 @@ class TestVenue < MiniTest::Test
   end
 
   def test_guest_can_afford_item()
-    answer = guest_can_afford_item?(@guest3, @food1)
+    answer = @venue.guest_can_afford_item?(@guest3, @food1)
     assert_equal(true, answer)
   end
   
