@@ -17,6 +17,7 @@ class TestDrink < MiniTest::Test
     foods = [food1, food2]
     drinks = [drink1, drink2]
     @bar = Bar.new(foods, drinks)
+    @bar2 = Bar.new([],[])
     @woowoo = Drink.new({name: "Woo Woo", discription: "Cocktail of vodka, cranberry and peach shnapps", price: 9})
     @pizza = Food.new({name: "Pizza", discription: "Stone baked pizza with 3 topping choices", price: 11})
   end
@@ -64,4 +65,19 @@ class TestDrink < MiniTest::Test
     food = @bar.return_food_by_name("Chicken Goujons")
     assert_equal("Chicken Goujons", food.name)
   end
+
+  def test_load_drinks()
+    @bar2.load_drinks("drinks.txt")
+    drink_class = @bar2.drinks[0].class
+    assert_equal(2, @bar2.drinks.length)
+    assert_equal(Drink, drink_class)
+  end
+
+  def test_save_drinks()
+    @bar.save_drinks("drinks.txt")
+    first_line = File.open("drinks.txt").readline()
+    expected_line = "name:Fosters:discription:Pint:price:4:\n"
+    assert_equal(expected_line, first_line)
+  end
+
 end

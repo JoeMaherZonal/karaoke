@@ -35,5 +35,4 @@ class Venue
     guest_to_charge = @rooms[room_index].return_guest_by_name(guest_name)
     @rooms[room_index].charge_guest(guest_to_charge, food_price)
   end
-
 end

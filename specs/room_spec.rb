@@ -80,8 +80,7 @@ class TestRoom < MiniTest::Test
   def test_save_songs_to_textfile()
     @room2.save_songs("songs.txt")
     first_line = File.open("songs.txt").readline
-    expected_line = "name:My Way:artist:Frank Sinatra:genre:Jazz:year:1969:\n"
+    expected_line = "title:My Way:artist:Frank Sinatra:genre:Jazz:year:1969:\n"
     assert_equal(expected_line, first_line)
   end
-
 end

@@ -73,4 +73,6 @@ class TestVenue < MiniTest::Test
     assert_equal(88, @venue.rooms[0].guests[0].money)
   end
 
+  
+
 end
