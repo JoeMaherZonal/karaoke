@@ -94,4 +94,9 @@ class TestDrink < MiniTest::Test
     assert_equal(expected_line, first_line)
   end
 
+  def test_return_item_by_name()
+    item = @bar.return_item_by_name("Fosters")
+    assert_equal("Fosters", item.name)
+  end
+
 end

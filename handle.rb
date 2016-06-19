@@ -13,6 +13,18 @@ class Handle
     @viewer = viewer
   end
 
+  def display_current_rooms()
+
+  end
+
+  def charge_guest()
+    guest_name = @viewer.return_guest_name()
+    item_name = @viewer.return_item_name(guest_name)
+    guest = @viewer.venue.return_guest_with_name(guest_name)
+    item = @viewer.venue.bar.return_item_by_name(item_name)
+    apply charge
+
+
   def load_test_data()
     params = @viewer.display_create_room()
     room = Room.new(params)

@@ -13,14 +13,14 @@ class TestVenue < MiniTest::Test
 
   def setup()
     burger = {name: "Burger", discription: "Beef Burger, served with chips or salad", price: 12}
-    food1 = Food.new(burger)
+    @food1 = Food.new(burger)
     chicken = {name: "Chicken Goujons", discription: "Chicken Goujons served with sweet chilli dip", price: 5}
     food2 = Food.new(chicken)
     fosters = {name: "Fosters", discription: "Pint", price: 4}
     drink1 = Drink.new(fosters)
     cola = {name: "Coke Cola", discription: "330ml", price: 2.5}
     drink2 = Drink.new(cola)
-    foods = [food1, food2]
+    foods = [@food1, food2]
     drinks = [drink1, drink2]
     bar = Bar.new(foods, drinks)
     @woowoo = Drink.new({name: "Woo Woo", discription: "Cocktail of vodka, cranberry and peach shnapps", price: 9})
@@ -83,6 +83,10 @@ class TestVenue < MiniTest::Test
     assert_equal(88, @venue.rooms[0].guests[0].money)
   end
 
+  def test_guest_can_afford_item()
+    answer = guest_can_afford_item?(@guest3, @food1)
+    assert_equal(true, answer)
+  end
   
 
 end
