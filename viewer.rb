@@ -14,7 +14,7 @@ class Viewer
 
   def get_input()
     print "> "
-    return gets.chomp
+    return gets.chomp.downcase
   end
 
   def create_song_hash(title, artist, year)
@@ -38,10 +38,19 @@ class Viewer
       puts "6-Edit Karaoke bar"
       puts "7-Exit"
       puts ""
+      puts "8-Load test data"
+      puts ""
       print "> "
       choice = gets.chomp.to_i
-      return choice if (choice > 0 && choice < 8)
+
+      kill_program() if choice == 7
+      return choice if (choice > 0 && choice < 9)
     end
+  end
+
+  def kill_program()
+    system("clear")
+    abort("Good Bye!")
   end
 
   def in_or_out()
@@ -52,8 +61,32 @@ class Viewer
     return choice if choice == "in" || choice == "out"
   end
 
-end
+  def display_create_room()
+    system("clear")
+    puts "<<Room Creator>>"
+    puts ""
+    puts "What is the maximum capacity of this room?"
+    max_cap = get_input()
+    puts "How much does this room cost per guest?"
+    print "> £"
+    price = gets.to_i
+    room = {songs: [], guests: [], max_capacity: max_cap, fee: price}
+    return room
+  end
+  def successful_load()
+    puts ""
+    puts "-Succesfuly loaded!"
+    puts ""
+    sleep(2)
+  end
 
-viewer = Viewer.new()
-viewer.display_menu
+  def unsuccessful_load()
+    puts ""
+    puts "Unsuccessful load, check default load files have data."
+    puts ""
+    sleep(2)
+  end
+
+
+end
 

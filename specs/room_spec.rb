@@ -12,9 +12,12 @@ class TestRoom < MiniTest::Test
     song2 = Song.new({title: "Purple Rain", artist: "Prince", genre: "Pop", year: 1984})
     songs = [song1, song2]
     guests = [guest1, guest2]
-    @room1 = Room.new(songs, guests, 5, 5)
-    @room2 = Room.new(songs, guests, 2, 20)
-    @room3 = Room.new([], [], 10, 10)
+    room_params1 = {songs: songs, guests: guests, max_capacity: 5, fee: 5}
+    room_params2 = {songs: songs, guests: guests, max_capacity: 2, fee: 10}
+    room_params3 = {songs: [], guests: [], max_capacity: 10, fee: 10}
+    @room1 = Room.new(room_params1)
+    @room2 = Room.new(room_params2)
+    @room3 = Room.new(room_params3)
     @guest3 = Guest.new({name: "Charlie Maher", tel: "98765432101", email: "charlie_maher@hotmail.com", money: 50, fav_song: "Purple Rain"})
   end
 
