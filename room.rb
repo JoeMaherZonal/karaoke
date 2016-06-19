@@ -83,8 +83,9 @@ class Room
         guest_params[temp_ary[0].to_sym] = temp_ary[1].to_s
         guest_params[temp_ary[2].to_sym] = temp_ary[3].to_s
         guest_params[temp_ary[4].to_sym] = temp_ary[5].to_s
-        guest_params[temp_ary[6].to_sym] = temp_ary[7].to_s
-        guest = Song.new(guest_params)
+        guest_params[temp_ary[6].to_sym] = temp_ary[7].to_i
+        guest_params[temp_ary[8].to_sym] = temp_ary[9].to_s
+        guest = Guest.new(guest_params)
         @guests << guest
       end
     load_data.close

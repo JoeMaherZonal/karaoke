@@ -71,6 +71,8 @@ class TestVenue < MiniTest::Test
   def test_return_guest_by_name()
     guest = @venue.return_guest_with_name("Joe Maher")
     assert_equal("Joe Maher", guest.name)
+    guest = @venue.return_guest_with_name("Rachel Barry")
+    assert_equal("Rachel Barry", guest.name)
   end
 
   def test_charge_guest_for_drink()
@@ -88,5 +90,4 @@ class TestVenue < MiniTest::Test
     assert_equal(true, answer)
   end
   
-
 end

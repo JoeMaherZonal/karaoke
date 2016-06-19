@@ -28,9 +28,8 @@ class Bar
   end
 
   def return_item_by_name(item_name)
-    item = @drinks.each {|drink| return drink if drink.name == item_name}
-    item = @foods.each{|food| return food if food.name == item_name} if item.nil?
-    return item
+    @drinks.each {|drink| return drink if drink.name.downcase == item_name.downcase}
+    @foods.each{|food| return food if food.name.downcase == item_name.downcase}
   end
 
   def return_drink_price_by_name(name)

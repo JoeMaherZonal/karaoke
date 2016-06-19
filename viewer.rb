@@ -73,6 +73,19 @@ class Viewer
     room = {songs: [], guests: [], max_capacity: max_cap, fee: price}
     return room
   end
+
+  def return_guest_name()
+    puts "Who is purchasing?"
+    name = get_input()
+    return name
+  end
+
+  def return_item_name(name)
+    puts "What is #{name} purchasing?"
+    item_name = get_input()
+    return item_name
+  end
+
   def successful_load()
     puts ""
     puts "-Succesfuly loaded!"
@@ -86,6 +99,29 @@ class Viewer
     puts ""
     sleep(2)
   end
+
+  def confirmation_of_purchase(guest_name, item_name, item_price)
+    puts ""
+    puts "#{guest_name} paid £#{item_price.to_f} for #{item_name}"
+    puts ""
+    sleep(3)
+  end
+
+  def guest_cant_afford_item(guest_name, item_name, guest_money, item_price)
+    puts ""
+    puts "#{guest_name} has £#{guest_money} and can't afford #{item_name} for #{item_price}"
+    puts ""
+    sleep(4)
+  end
+
+  def invalid_item_message(item_or_guest)
+    puts ""
+    puts "<<#{item_or_guest} does not exist!>>"
+    puts ""
+    sleep(3)
+  end
+
+  def 
 
 
 end

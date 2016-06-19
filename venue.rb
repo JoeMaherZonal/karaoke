@@ -25,7 +25,7 @@ class Venue
   def return_guest_with_name(guest_name)
     @rooms.each do |room|
       room.guests.each do |guest|
-       return guest if guest_name == guest.name
+       return guest if guest_name.downcase == guest.name.downcase
        end
     end
   end
