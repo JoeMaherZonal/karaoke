@@ -6,7 +6,7 @@ require_relative('../song')
 
 class TestRoom < MiniTest::Test
   def setup()
-    guest1 = Guest.new({name: "Joe Maher", tel: "07539271620", email: "joseph-maher@hotmail.co.uk", money: 100, fav_song: "My Way" })
+    guest1 = Guest.new({name: "Joe Maher", tel: "07539271620", email: "joseph-maher@hotmail.co.uk", money: 100, fav_song: "My Way"})
     guest2 = Guest.new({name: "Rachel Barry", tel: "12345678910", email: "rachel_barry@gmail.com", money: 20, fav_song: "Born to Run" })
     song1 = Song.new({title: "My Way", artist: "Frank Sinatra", genre: "Jazz", year: 1969})
     song2 = Song.new({title: "Purple Rain", artist: "Prince", genre: "Pop", year: 1984})

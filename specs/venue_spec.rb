@@ -33,9 +33,14 @@ class TestVenue < MiniTest::Test
     song2 = Song.new({title: "Purple Rain", artist: "Prince", genre: "Pop", year: 1984})
     songs = [song1, song2]
     guests = [guest1, guest2]
-    @room1 = Room.new(songs, guests, 5, 10)
-    room2 = Room.new(songs, guests, 2, 10)
-    @room3 = Room.new(songs, guests, 20, 10)
+
+    room_params1 = {songs: songs, guests: guests, max_capacity: 5, fee: 10}
+    room_params2 = {songs: songs, guests: guests, max_capacity: 2, fee: 10}
+    room_params3 = {songs: songs, guests: guests, max_capacity: 20, fee: 10}
+
+    @room1 = Room.new(room_params1)
+    room2 = Room.new(room_params2)
+    @room3 = Room.new(room_params3)
     rooms = [@room1, room2]
 
     @venue = Venue.new(rooms, bar)

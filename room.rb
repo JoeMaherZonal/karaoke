@@ -32,6 +32,10 @@ class Room
     guest.charge(@fee)
   end
 
+  def add_purchase(guest, item)
+    @guests.each {|guest| guest.purchases << item if guest == guest_to_charge}
+  end
+
   def can_afford_room?(guest)
     guest.money >= @fee
   end

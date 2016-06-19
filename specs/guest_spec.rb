@@ -11,4 +11,9 @@ class TestGuest < MiniTest::Test
     assert_equal("Joe Maher", @guest.name)
   end
 
+  def test_purchase()
+    @guest.purchase("item")
+    assert_equal(1, @guest.purchases.length)
+  end
+
 end
