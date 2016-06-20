@@ -10,16 +10,17 @@ class Viewer
       puts "3-Check entire room out"
       puts "4-Register new guest"
       puts "5-Charge guest"
-      puts "6-Edit Karaoke bar"
-      puts "7-Exit"
+      puts "6-Add music"
+      puts "7-Edit Karaoke bar"
+      puts "8-Exit"
       puts ""
-      puts "8-Load test data"
+      puts "9-Load test data"
       puts ""
       print "> "
       choice = gets.chomp.to_i
 
-      kill_program() if choice == 7
-      return choice if (choice > 0 && choice < 9)
+      kill_program() if choice == 8
+      return choice if (choice > 0 && choice < 10)
     end
   end
 
@@ -31,6 +32,23 @@ class Viewer
       puts "1-Add food item to bar"
       puts "2-Add drink item to bar"
       puts "3-Add a new room"
+      puts "4-Finished"
+      puts ""
+      print "> "
+      choice = gets.chomp.to_i
+      return if choice == 4
+      return choice if (choice > 0 && choice < 4)
+    end
+  end
+
+  def add_music_menu()
+      while true
+      system("clear")
+      puts "Music menu"
+      puts ""
+      puts "1-Add a song to room"
+      puts "2-Add a playlist to room"
+      puts "3-Save a rooms music as a playlist"
       puts "4-Finished"
       puts ""
       print "> "
@@ -193,9 +211,9 @@ class Viewer
     end
   end
 
-  def get_number_of_room_to_check_out(out_or_in)
+  def get_number_of_room_to(out_or_in)
     puts ""
-    puts "Which room would you like to check #{out_or_in}?"
+    puts "Which room would you like to #{out_or_in}?"
     puts ""
     choice = get_input()
     return choice.to_i
@@ -217,11 +235,11 @@ class Viewer
 
   def room_stat_title()
     puts ""
-    puts "Room \t Capacity \t Spend"
+    puts "Room \t Capacity \t Spend \t\t Songs"
   end
 
-  def print_status_of_room(room_num, num_of_guests, max_cap, spend_of_guests)
-    puts "#{room_num} \t #{num_of_guests}/#{max_cap} \t\t £#{spend_of_guests}"
+  def print_status_of_room(room_num, num_of_guests, max_cap, spend_of_guests, num_of_songs)
+    puts "#{room_num} \t #{num_of_guests}/#{max_cap} \t\t £#{spend_of_guests} \t\t #{num_of_songs}"
   end
 
   def get_guest_list()
@@ -263,6 +281,28 @@ class Viewer
     print "> "
     price = gets.to_i
     return {name: name, discription: disc, price: price}
+  end
+
+  def get_song_details()
+    system("clear")
+    puts "<<Song creator>>"
+    puts "What is the songs title?"
+    title = get_input()
+    puts "Who is the artist?"
+    artist = get_input()
+    puts "What genre is #{title}?"
+    genre = get_input()
+    puts "What year was #{title} released?"
+    year = get_input()
+    song = {titel: title, artist: artist, genre: genre, year: year}
+    return song
+  end
+
+  def get_filepath_of_playlist()
+    puts ""
+    puts "What is the file of your playlist called?"
+    file_path = get_input
+    return file_path
   end
 
 end

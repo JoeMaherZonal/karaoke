@@ -93,7 +93,7 @@ class Handle
       return
     else
       list_rooms()
-      room_number = @viewer.get_number_of_room_to_check_out("out")
+      room_number = @viewer.get_number_of_room_to("check out")
       index = room_number - 1
       @venue.rooms[index].check_out_guests()
       @viewer.successfuly_checked_out_guests(room_number) if @venue.rooms[index].guests.length == 0
@@ -105,8 +105,9 @@ class Handle
     @viewer.room_stat_title()
     while count < @venue.rooms.length
       num_of_guests = @venue.rooms[count].guests.length
+      num_of_songs = @venue.rooms[count].songs.length
       total_spend = @venue.rooms[count].total_spend_of_all_guests()
-      @viewer.print_status_of_room((count + 1), num_of_guests, @venue.rooms[count].max_capacity, total_spend)
+      @viewer.print_status_of_room((count + 1), num_of_guests, @venue.rooms[count].max_capacity, total_spend, num_of_songs)
       count += 1
     end
 
@@ -119,11 +120,30 @@ class Handle
       return
     else
       list_rooms()
-      room_number = @viewer.get_number_of_room_to_check_out("in")
+      room_number = @viewer.get_number_of_room_to("check in")
       index = room_number - 1
       file_path = @viewer.get_guest_list()
       if File.exist?(file_path)
         @venue.rooms[index].load_guests_from_list(file_path)
+        @viewer.successful_load()
+        return
+      else
+        @viewer.file_doesnt_exist()
+      end
+    end
+  end
+
+  def add_playlist()
+    if @venue.rooms.length == 0
+      @viewer.no_rooms_active()
+      return
+    else
+      list_rooms()
+      room_number = @viewer.get_number_of_room_to("add music to")
+      index = room_number - 1
+      file_path = @viewer.get_filepath_of_playlist()
+      if File.exist?(file_path)
+        @venue.rooms[index].load_songs(file_path)
         @viewer.successful_load()
         return
       else
@@ -148,6 +168,23 @@ class Handle
     end
   end
 
+  def add_music()
+    choice = @viewer.add_music_menu()
+    case choice
+    when 1
+      params = @viewer.get_song_details()
+      song = Song.new(params)
+      list_rooms()
+      room_number = @viewer.get_number_of_room_to("add music to")
+      index = room_number - 1
+      @venue.rooms[index].songs << song
+    when 2
+      add_playlist()
+    when 3
+      #save playlist
+    end
+  end
+
   def run()
     while true
       menu_selection = @viewer.main_menu_choice()
@@ -163,8 +200,10 @@ class Handle
       when 5
         charge_guest()
       when 6
-        edit_venue()
+        add_music()
       when 8
+        edit_venue()
+      when 9
         load_test_data()
       end
     end
